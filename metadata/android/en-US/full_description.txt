@@ -1,0 +1,11 @@
+CustomBank is a sophisticated banking simulator that provides a realistic banking app experience. Perfect for UI/UX exploration and financial interface testing.
+
+Key Features:
+- Multiple bank interfaces
+- Customizable account balances
+- Transaction history simulation
+- Virtual card management
+- Secure local storage
+- Modern UI design
+
+Note: This is a SIMULATION app for entertainment purposes only. It does not provide real banking services.

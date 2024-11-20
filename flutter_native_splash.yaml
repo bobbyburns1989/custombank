@@ -1,0 +1,15 @@
+flutter_native_splash:
+  color: "#0A1929"
+  image: assets/custombank_logo.png
+  branding: assets/custombank_logo.png
+  color_dark: "#0A1929"
+  image_dark: assets/custombank_logo.png
+  branding_dark: assets/custombank_logo.png
+
+  android_12:
+    image: assets/custombank_logo.png
+    icon_background_color: "#0A1929"
+    image_dark: assets/custombank_logo.png
+    icon_background_color_dark: "#0A1929"
+
+  web: false

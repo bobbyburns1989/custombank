@@ -1,0 +1,6 @@
+Initial release:
+- Multiple bank interfaces
+- Account management
+- Transaction history
+- Virtual cards
+- Customizable balances
