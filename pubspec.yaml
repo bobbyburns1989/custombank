@@ -1,7 +1,7 @@
 name: custombank
-description: A custom banking application
+description: Banking Simulator App
 publish_to: 'none'
-version: 1.0.1+3  # Increment both version name and code
+version: 1.0.1+3
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -9,20 +9,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  cupertino_icons: ^1.0.6
   shared_preferences: ^2.2.2
   google_fonts: ^6.1.0
   intl: ^0.18.1
   provider: ^6.1.1
   uuid: ^4.2.1
-  shimmer: ^2.0.0
-  flutter_markdown: ^0.6.18
+  shimmer: ^3.0.0
+  flutter_markdown: ^0.7.4+1
+  flutter_launcher_icons: ^0.13.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
-  flutter_launcher_icons: ^0.13.1
+  flutter_lints: ^3.0.1
   flutter_native_splash: ^2.3.6
 
 flutter:
@@ -43,3 +43,17 @@ flutter:
     - assets/legal/privacy_policy.md
     - assets/legal/terms_of_service.md
     - assets/custombank_logo.png
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/custombank_logo.png"
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  adaptive_icon_background: "#0A1929"
+  adaptive_icon_foreground: "assets/custombank_logo.png"
+  web:
+    generate: true
+    image_path: "assets/custombank_logo.png"
+    background_color: "#0A1929"
+    theme_color: "#1E88E5"
