@@ -446,98 +446,122 @@ Widget build(BuildContext context) {
   
   return Scaffold(
     appBar: AppBar(
-  backgroundColor: Colors.white,
-  elevation: 1,
-  title: Container(
-    decoration: BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.circular(8),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.15),
-          blurRadius: 4,
-          offset: const Offset(0, 2),
+      backgroundColor: Colors.white,
+      elevation: 1,
+      title: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.15),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
         ),
-      ],
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+        child: Image.asset(
+          bankTheme['logo'] as String,
+          height: 28,
+          fit: BoxFit.contain,
+        ),
+      ),
+      centerTitle: true,
     ),
-    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-    child: Image.asset(
-      bankTheme['logo'] as String,
-      height: 28,
-      fit: BoxFit.contain,
-    ),
-  ),
-  centerTitle: true,
-),
-    body: ListView(
-  children: [
-    const SizedBox(height: 16),
-    QuickActionsWidget(
-  primaryColor: bankTheme['primaryColor'] as Color,
-  bankId: selectedBank,
-  quickActions: (bankTheme['quickActions'] as List<dynamic>).cast<String>(),
-),
-    const SizedBox(height: 24),
-    Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Text(
-        'Accounts',
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-          color: Colors.grey.shade800,
+    body: SafeArea(
+      child: RefreshIndicator(
+        onRefresh: () async {},
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  QuickActionsWidget(
+                    primaryColor: bankTheme['primaryColor'] as Color,
+                    bankId: selectedBank,
+                    quickActions: (bankTheme['quickActions'] as List<dynamic>).cast<String>(),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: Text(
+                      'Accounts',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey.shade800,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                ],
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                accounts.map(
+                  (account) => AccountCardWidget(
+                    account: account,
+                    bankTheme: bankTheme,
+                    onTap: _showAccountOptions,
+                    index: accounts.indexOf(account),
+                  ),
+                ).toList(),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  const SizedBox(height: 24),
+                  FeaturedServicesWidget(
+                    primaryColor: bankTheme['primaryColor'] as Color,
+                    features: (bankTheme['features'] as List<dynamic>).cast<String>(),
+                  ),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ElevatedButton(
+                      onPressed: _addNewAccount,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: bankTheme['primaryColor'] as Color,
+                        elevation: 0,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.add, size: 20),
+                          SizedBox(width: 8),
+                          Text(
+                            'Open a New Account',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     ),
-    const SizedBox(height: 8),
-    ...accounts.map(
-      (account) => AccountCardWidget(
-        account: account,
-        bankTheme: bankTheme,
-        onTap: _showAccountOptions,
-        index: accounts.indexOf(account),
-      ),
-    ),
-    const SizedBox(height: 24),
-    FeaturedServicesWidget(
-      primaryColor: bankTheme['primaryColor'] as Color,
-      features: (bankTheme['features'] as List<dynamic>).cast<String>(),
-    ),
-    const SizedBox(height: 24),
-    Padding(
-  padding: const EdgeInsets.all(16),
-  child: ElevatedButton(  // Remove 'const'
-    onPressed: _addNewAccount,
-    style: ElevatedButton.styleFrom(
-      backgroundColor: bankTheme['primaryColor'] as Color,
-      elevation: 0,
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-    ),
-    child: const Row(  // Keep 'const' here
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(Icons.add, size: 20),
-        SizedBox(width: 8),
-        Text(
-          'Open a New Account',
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ],
-    ),
-  ),
-),
-  ],
-),
     bottomNavigationBar: CustomBottomNavigation(
       activeColor: bankTheme['primaryColor'] as Color,
       currentScreenIndex: 0,
       accounts: accounts,
     ),
   );
-}}
+}
+}

@@ -6,32 +6,103 @@ import 'screens/splash_screen.dart';
 import 'providers/navigation_provider.dart';
 
 void main() async {
-  // Ensure Flutter bindings are initialized
-  WidgetsFlutterBinding.ensureInitialized();
-  
-  // Initialize SharedPreferences
-  final prefs = await SharedPreferences.getInstance();
-  
-  // Set default values for first launch or screenshots
-  if (prefs.getString('selectedBank') == null || 
-      const bool.fromEnvironment('SCREENSHOT_MODE', defaultValue: false)) {
-    await prefs.setString('selectedBank', 'chase');
-    // Add mock data for screenshots if needed
-    if (const bool.fromEnvironment('SCREENSHOT_MODE', defaultValue: false)) {
-      await prefs.setString('profile_name', 'John Doe');
-      await prefs.setString('profile_email', 'john.doe@email.com');
-      // Add other screenshot data as needed
+  try {
+    // Ensure Flutter bindings are initialized
+    WidgetsFlutterBinding.ensureInitialized();
+    
+    // Initialize SharedPreferences with error handling
+    final prefs = await SharedPreferences.getInstance();
+    
+    // Set default values for first launch or screenshots
+    if (prefs.getString('selectedBank') == null || 
+        const bool.fromEnvironment('SCREENSHOT_MODE', defaultValue: false)) {
+      await prefs.setString('selectedBank', 'chase');
+      
+      // Add mock data for screenshots if needed
+      if (const bool.fromEnvironment('SCREENSHOT_MODE', defaultValue: false)) {
+        await prefs.setString('profile_name', 'John Doe');
+        await prefs.setString('profile_email', 'john.doe@email.com');
+      }
     }
-  }
 
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => NavigationProvider()),
-      ],
-      child: const CustomBankApp(),
-    ),
-  );
+    // Set up error widget customization
+    ErrorWidget.builder = (FlutterErrorDetails details) {
+      return MaterialApp(
+        home: Scaffold(
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, color: Colors.red, size: 48),
+                const SizedBox(height: 16),
+                const Text(
+                  'Oops! Something went wrong.',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  details.exception.toString(),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () async {
+                    // Clear preferences and restart
+                    await prefs.clear();
+                    main();
+                  },
+                  child: const Text('Restart App'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    };
+
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ],
+        child: const CustomBankApp(),
+      ),
+    );
+  } catch (e) {
+    debugPrint('Error initializing app: $e');
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(Icons.error_outline, color: Colors.red, size: 48),
+              const SizedBox(height: 16),
+              const Text(
+                'Unable to Start App',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                e.toString(),
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.grey),
+              ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Attempt to restart app
+                  main();
+                },
+                child: const Text('Try Again'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ));
+  }
 }
 
 class CustomBankApp extends StatelessWidget {
@@ -50,7 +121,6 @@ class CustomBankApp extends StatelessWidget {
         textTheme: GoogleFonts.interTextTheme(
           Theme.of(context).textTheme,
         ),
-        // Add additional theme configurations
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white,
           elevation: 0,
