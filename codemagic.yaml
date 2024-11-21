@@ -8,14 +8,12 @@ workflows:
       cocoapods: default
       flutter: stable
       ios_signing:
-        provisioning_profiles: ["VS8295GFH3.com.custombank.app"]
         distribution_type: app_store
         bundle_identifier: VS8295GFH3.com.custombank.app
     scripts:
       - name: Set up code signing
         script: |
           keychain initialize
-          app-store-connect fetch-signing-files VS8295GFH3.com.custombank.app --type IOS_APP_STORE --create
           keychain add-certificates
           
       - name: Get Flutter packages
