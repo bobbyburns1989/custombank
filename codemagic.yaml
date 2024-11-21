@@ -1,5 +1,5 @@
 workflows:
-  ios-workflow:
+  ios-workflow:  # This name must match exactly
     triggering:
       events:
         - push
