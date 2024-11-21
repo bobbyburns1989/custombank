@@ -8,6 +8,7 @@ workflows:
       cocoapods: default
       flutter: stable
       ios_signing:
+        provisioning_profiles: ["VS8295GFH3.com.custombank.app"]
         distribution_type: app_store
         bundle_identifier: VS8295GFH3.com.custombank.app
     scripts:
