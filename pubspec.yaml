@@ -10,20 +10,21 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
-  shared_preferences: ^2.2.2
   google_fonts: ^6.1.0
   intl: ^0.18.1
   provider: ^6.1.1
   uuid: ^4.2.1
   shimmer: ^3.0.0
   flutter_markdown: ^0.7.4+1
-  flutter_launcher_icons: ^0.13.1
+  path_provider: ^2.1.5
+  shared_preferences: ^2.3.3
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
-  flutter_native_splash: ^2.3.6
+  # flutter_native_splash: ^2.4.3
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true

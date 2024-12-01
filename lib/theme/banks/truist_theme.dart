@@ -65,7 +65,7 @@ final truistTheme = BankTheme(
       const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
     ),
     overlayColor: WidgetStateProperty.resolveWith((states) {
-      return states.contains(MaterialState.pressed)
+      return states.contains(WidgetState.pressed)
           ? const Color(0xFF8246AF).withOpacity(0.1)
           : null;
     }),

@@ -12,11 +12,11 @@ class CustomBottomNavigation extends StatelessWidget {
   final int currentScreenIndex;
 
   const CustomBottomNavigation({
-    Key? key,
+    super.key,
     required this.activeColor,
     this.accounts,
     required this.currentScreenIndex,
-  }) : super(key: key);
+  });
 
   void _onItemTapped(BuildContext context, int index) {
     if (index == currentScreenIndex) return;

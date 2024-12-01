@@ -5,10 +5,10 @@ class FeaturedServicesWidget extends StatelessWidget {
   final List<String> features;
 
   const FeaturedServicesWidget({
-    Key? key,
+    super.key,
     required this.primaryColor,
     required this.features,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

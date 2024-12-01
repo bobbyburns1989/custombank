@@ -10,14 +10,14 @@ class BankCard extends StatefulWidget {
   final bool isLoading; // Add this field
 
   const BankCard({
-    Key? key,
+    super.key,
     required this.account,
     required this.primaryColor,
     required this.secondaryColor,
     required this.onTap,
     this.isCredit = false,
     this.isLoading = false, // Add this parameter
-  }) : super(key: key);
+  });
 
   @override
   State<BankCard> createState() => _BankCardState();

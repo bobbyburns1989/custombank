@@ -10,11 +10,11 @@ class TransactionHistoryScreen extends StatefulWidget {
   final String bankId;
 
   const TransactionHistoryScreen({
-    Key? key,
+    super.key,
     required this.accountName,
     required this.transactions,
     required this.bankId,
-  }) : super(key: key);
+  });
 
   @override
   State<TransactionHistoryScreen> createState() => _TransactionHistoryScreenState();

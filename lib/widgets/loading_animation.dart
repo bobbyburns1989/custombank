@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadingAnimation extends StatefulWidget {
-  const LoadingAnimation({Key? key}) : super(key: key);
+  const LoadingAnimation({super.key});
 
   @override
   State<LoadingAnimation> createState() => _LoadingAnimationState();

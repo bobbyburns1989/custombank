@@ -1,0 +1,7 @@
+flutter_icons:
+  ios: true
+  remove_alpha_ios: true
+  image_path_ios: "assets/custombank_logo.png"
+  adaptive_icon_background: "#0A1929"
+  adaptive_icon_foreground: "assets/custombank_logo.png"
+  ios_content_mode: "scaleAspectFit"

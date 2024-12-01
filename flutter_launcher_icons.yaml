@@ -1,13 +1,6 @@
 flutter_icons:
-  android: "launcher_icon"
-  ios: true
   image_path: "assets/custombank_logo.png"
-  min_sdk_android: 21
+  android: true
+  ios: true
   remove_alpha_ios: true
-  adaptive_icon_background: "#0A1929"
-  adaptive_icon_foreground: "assets/custombank_logo.png"
-  web:
-    generate: true
-    image_path: "assets/custombank_logo.png"
-    background_color: "#0A1929"
-    theme_color: "#1E88E5"
+  ios_content_mode: "scale"

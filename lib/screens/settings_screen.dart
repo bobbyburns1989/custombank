@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:custombank/screens/legal_document_screen.dart';
 
 class SettingsScreen extends StatefulWidget {
-  const SettingsScreen({Key? key}) : super(key: key);
+  const SettingsScreen({super.key});
 
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
@@ -190,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LegalDocumentScreen(
+            builder: (context) => const LegalDocumentScreen(
               title: 'Privacy Policy',
               assetPath: 'assets/legal/privacy_policy.md',
             ),
@@ -206,7 +206,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => LegalDocumentScreen(
+            builder: (context) => const LegalDocumentScreen(
               title: 'Terms of Service',
               assetPath: 'assets/legal/terms_of_service.md',
             ),

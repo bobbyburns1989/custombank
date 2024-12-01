@@ -9,12 +9,12 @@ class AccountCardWidget extends StatelessWidget {
   final int index;
 
   const AccountCardWidget({
-    Key? key,
+    super.key,
     required this.account,
     required this.bankTheme,
     required this.onTap,
     required this.index,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

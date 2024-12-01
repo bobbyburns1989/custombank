@@ -4,7 +4,7 @@ import 'package:custombank/services/bank_service.dart';
 import 'package:custombank/widgets/custom_bottom_navigation.dart';
 
 class BanksScreen extends StatefulWidget {
-  const BanksScreen({Key? key}) : super(key: key);
+  const BanksScreen({super.key});
 
   @override
   State<BanksScreen> createState() => _BanksScreenState();

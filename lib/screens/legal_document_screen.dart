@@ -7,10 +7,10 @@ class LegalDocumentScreen extends StatelessWidget {
   final String assetPath;
 
   const LegalDocumentScreen({
-    Key? key,
+    super.key,
     required this.title,
     required this.assetPath,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

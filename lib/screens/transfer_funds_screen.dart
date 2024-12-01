@@ -8,7 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class TransferFundsScreen extends StatefulWidget {
   final List<AccountCard> accounts;
 
-  const TransferFundsScreen({Key? key, required this.accounts}) : super(key: key);
+  const TransferFundsScreen({super.key, required this.accounts});
 
   @override
   State<TransferFundsScreen> createState() => _TransferFundsScreenState();

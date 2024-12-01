@@ -3,7 +3,7 @@ import 'package:custombank/screens/login_screen.dart';
 import 'package:custombank/widgets/loading_animation.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();

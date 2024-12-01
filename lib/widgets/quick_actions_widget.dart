@@ -6,11 +6,11 @@ class QuickActionsWidget extends StatelessWidget {
   final List<String> quickActions;
 
   const QuickActionsWidget({
-    Key? key,
+    super.key,
     required this.primaryColor,
     required this.bankId,
     required this.quickActions,
-  }) : super(key: key);
+  });
 
   // Get bank-specific styles
   _BankStyle _getBankStyle() {
