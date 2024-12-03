@@ -8,6 +8,7 @@ import 'package:custombank/widgets/custom_bottom_navigation.dart';
 import 'package:custombank/widgets/account_card_widget.dart';
 import 'package:custombank/widgets/quick_actions_widget.dart';
 import 'package:custombank/widgets/featured_services_widget.dart';
+import 'package:flutter/services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -187,41 +188,48 @@ class _HomeScreenState extends State<HomeScreen> {
     await preferences.setString('accounts_$bankId', accountsJson);
   }
 
-  void _editBalance(int index) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        String newBalance = '';
-        return AlertDialog(
-          title: Text('Edit ${accounts[index].name} Balance'),
-          content: TextField(
-            keyboardType: TextInputType.number,
-            decoration: const InputDecoration(
-              labelText: 'New Balance',
-              prefixText: '\$',
-            ),
-            onChanged: (value) => newBalance = value,
+void _editBalance(int index) {
+  // Create a TextEditingController to handle the input
+  final TextEditingController balanceController = TextEditingController();
+  
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text('Edit ${accounts[index].name} Balance'),
+        content: TextField(
+          controller: balanceController,
+          // Change to decimal number keyboard
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+          decoration: const InputDecoration(
+            labelText: 'New Balance',
+            prefixText: '\$',
           ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel'),
-            ),
-            FilledButton(
-              onPressed: () {
-                setState(() {
-                  accounts[index].balance = double.tryParse(newBalance) ?? accounts[index].balance;
-                  _saveAccountsForBank(selectedBank);
-                });
-                Navigator.pop(context);
-              },
-              child: const Text('Save'),
-            ),
+          // Add input formatting
+          inputFormatters: [
+            FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
           ],
-        );
-      },
-    );
-  }
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('Cancel'),
+          ),
+          FilledButton(
+            onPressed: () {
+              setState(() {
+                accounts[index].balance = double.tryParse(balanceController.text) ?? accounts[index].balance;
+                _saveAccountsForBank(selectedBank);
+              });
+              Navigator.pop(context);
+            },
+            child: const Text('Save'),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 void _editCreditLimit(int index) {
   TextEditingController limitController = TextEditingController();
@@ -231,11 +239,14 @@ void _editCreditLimit(int index) {
       title: const Text('Edit Credit Limit'),
       content: TextField(
         controller: limitController,
-        keyboardType: TextInputType.number,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
         decoration: const InputDecoration(
           labelText: 'Credit Limit',
           prefixText: '\$',
         ),
+        inputFormatters: [
+          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+        ],
       ),
       actions: [
         TextButton(
@@ -274,11 +285,14 @@ void _editCreditLimit(int index) {
                 onChanged: (value) => name = value,
               ),
               TextField(
-                keyboardType: TextInputType.number,
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 decoration: const InputDecoration(
                   labelText: 'Initial Balance',
                   prefixText: '\$',
                 ),
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')),
+                ],
                 onChanged: (value) => balance = value,
               ),
               DropdownButton<String>(
